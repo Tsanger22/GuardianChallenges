@@ -13,22 +13,20 @@ const restrictions = [
   "Can’t use super",
   "Equip a waveframe",
   "Double special",
-  "Put on a “off-meta” exotic",
+  "Put on an off-meta exotic",
   "No 5th level artifact",
   "Only one element for damage",
   "No finishers",
   "No fonts",
-  "Equip a sword",
-  "Swap to a dark subclass if you are light and vise versa"
+  "Use a sword"
 ];
 
-// Define which are repeatable
+// Challenges that are allowed to repeat and NOT added to the list
 const repeatableSet = new Set([
   "Equip a sword",
-  "Swap to a dark subclass if you are light and vise versa",
   "Equip a waveframe",
   "Double special",
-  "Put on a “off-meta” exotic",
+  "Put on an off-meta exotic",
   "Fusion Rifles in each slot",
   "Equip a sidearm",
   "Swap heavy",
@@ -37,24 +35,41 @@ const repeatableSet = new Set([
   "Grenade Launchers each slot"
 ]);
 
+const rollBtn = document.getElementById("rollbtn");
+const result = document.getElementById("result");
+const selectedChallengesList = document.getElementById("selectedChallengesList");
+
 rollBtn.addEventListener("click", () => {
-  const choice = restrictions[Math.floor(Math.random() * restrictions.length)];
-  result.textContent = choice;
+  rollBtn.disabled = true;
 
-  if (repeatableSet.has(choice)) {
-    // Show in result but don't add to list
-    return;
-  }
+  let count = 0;
+  const maxCount = 20;
+  let finalChoice = "";
 
-  // For unique ones, check duplicates and add
-  const existingItems = Array.from(selectedChallengesList.children).map(li => li.textContent);
+  const spin = setInterval(() => {
+    const choice = restrictions[Math.floor(Math.random() * restrictions.length)];
+    result.textContent = choice;
+    finalChoice = choice;
+    count++;
+    if (count > maxCount) {
+      clearInterval(spin);
+      rollBtn.disabled = false;
 
-  if (existingItems.includes(choice)) {
-    alert("This challenge is already selected!");
-    return; // no duplicate
-  }
+      if (repeatableSet.has(finalChoice)) {
+        // repeatable - show result but don't add
+        return;
+      }
 
-  const li = document.createElement("li");
-  li.textContent = choice;
-  selectedChallengesList.appendChild(li);
+      // Check duplicates before adding
+      const existingItems = Array.from(selectedChallengesList.children).map(li => li.textContent);
+      if (existingItems.includes(finalChoice)) {
+        alert("This challenge is already selected!");
+        return;
+      }
+
+      const li = document.createElement("li");
+      li.textContent = finalChoice;
+      selectedChallengesList.appendChild(li);
+    }
+  }, 100);
 });

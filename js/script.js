@@ -42,24 +42,17 @@ const result = document.getElementById("result");
 const selectedChallengesList = document.getElementById("selectedChallengesList");
 
 function showPopup(message) {
-  const popup = document.createElement("div");
-  popup.textContent = message;
-  popup.style.position = "fixed";
-  popup.style.bottom = "30px";
-  popup.style.right = "30px";
-  popup.style.background = "#66fcf1";
-  popup.style.color = "#0b0c10";
-  popup.style.padding = "10px 20px";
-  popup.style.borderRadius = "5px";
-  popup.style.fontFamily = "Arial, sans-serif";
-  popup.style.boxShadow = "0 0 10px #66fcf1";
-  popup.style.zIndex = "9999";
-  document.body.appendChild(popup);
+  const popup = document.getElementById("popup");
+  const popupContent = document.getElementById("popup-content");
 
-  setTimeout(() => {
-    popup.remove();
-  }, 2000);
+  popupContent.textContent = message;
+  popup.classList.remove("hidden");
+
+  popupContent.onclick = () => {
+    popup.classList.add("hidden");
+  };
 }
+
 
 rollBtn.addEventListener("click", () => {
   rollBtn.disabled = true;

@@ -13,35 +13,48 @@ const restrictions = [
   "Can’t use super",
   "Equip a waveframe",
   "Double special",
-  "Put on an off-meta exotic",
+  "Put on a “off-meta” exotic",
   "No 5th level artifact",
   "Only one element for damage",
   "No finishers",
   "No fonts",
-  "Use a sword"
+  "Equip a sword",
+  "Swap to a dark subclass if you are light and vise versa"
 ];
 
-const rollBtn = document.getElementById("rollbtn");
-const result = document.getElementById("result");
-const selectedChallengesList = document.getElementById("selectedChallengesList");
+// Define which are repeatable
+const repeatableSet = new Set([
+  "Equip a sword",
+  "Swap to a dark subclass if you are light and vise versa",
+  "Equip a waveframe",
+  "Double special",
+  "Put on a “off-meta” exotic",
+  "Fusion Rifles in each slot",
+  "Equip a sidearm",
+  "Swap heavy",
+  "RanDIM",
+  "Swap Characters",
+  "Grenade Launchers each slot"
+]);
 
 rollBtn.addEventListener("click", () => {
-  rollBtn.disabled = true;
+  const choice = restrictions[Math.floor(Math.random() * restrictions.length)];
+  result.textContent = choice;
 
-  let count = 0;
-  const maxCount = 20;
+  if (repeatableSet.has(choice)) {
+    // Show in result but don't add to list
+    return;
+  }
 
-  const spin = setInterval(() => {
-    const choice = restrictions[Math.floor(Math.random() * restrictions.length)];
-    result.textContent = choice;
-    count++;
-    if (count > maxCount) {
-      clearInterval(spin);
-      rollBtn.disabled = false;
+  // For unique ones, check duplicates and add
+  const existingItems = Array.from(selectedChallengesList.children).map(li => li.textContent);
 
-      const li = document.createElement("li");
-      li.textContent = choice;
-      selectedChallengesList.appendChild(li);
-    }
-  }, 100);
+  if (existingItems.includes(choice)) {
+    alert("This challenge is already selected!");
+    return; // no duplicate
+  }
+
+  const li = document.createElement("li");
+  li.textContent = choice;
+  selectedChallengesList.appendChild(li);
 });

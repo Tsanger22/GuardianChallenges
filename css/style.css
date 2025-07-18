@@ -48,15 +48,23 @@ body {
   color: #66fcf1;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   max-width: 400px;
-  text-align: left;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
 }
 
 #selectedChallengesList {
-  list-style-type: disc;
-  padding-left: 20px;
+  list-style-type: none;
+  padding-left: 0;
   max-height: 200px;
   overflow-y: auto;
   border: 1px solid #45a29e;
   border-radius: 6px;
   background: #0b0c10;
 }
+
+#selectedChallengesList li {
+  padding: 8px;
+  border-bottom: 1px solid #45a29e;
+}
+

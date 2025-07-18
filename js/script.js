@@ -21,28 +21,28 @@ const restrictions = [
   "Use a sword"
 ];
 
-const button = document.getElementById('rollbtn');
-const result = document.getElementById('result');
+const selectedChallengesList = document.getElementById("selectedChallengesList");
 
-button.addEventListener('click', () => {
-  button.disabled = true;
+rollBtn.addEventListener("click", () => {
+  rollBtn.disabled = true;
+
   let count = 0;
   const maxCount = 20;
-  const interval = setInterval(() => {
-    const randomIndex = Math.floor(Math.random() * restrictions.length);
-    result.textContent = restrictions[randomIndex];
 
-    // Flicker/glow effect on result
-    result.style.boxShadow = '0 0 40px #66fcf1';
-
-    setTimeout(() => {
-      result.style.boxShadow = '0 0 20px #66fcf1';
-    }, 100);
-
+  const spin = setInterval(() => {
+    const choice = restrictions[Math.floor(Math.random() * restrictions.length)];
+    result.textContent = choice;
     count++;
     if (count > maxCount) {
-      clearInterval(interval);
-      button.disabled = false;
+      clearInterval(spin);
+      rollBtn.disabled = false;
+
+      // Add the final choice to the list
+      const li = document.createElement("li");
+      li.textContent = choice;
+      selectedChallengesList.appendChild(li);
     }
   }, 100);
 });
+
+

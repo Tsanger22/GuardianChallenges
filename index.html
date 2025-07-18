@@ -1,0 +1,73 @@
+ <!-- Font -->
+ <link href= "https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+
+
+<!-- Confetti -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+
+
+<!-- Engram Sound -->
+<audio id="rollSound" src="https://cdn.pixabay.com/download/audio/2022/03/30/audio_abcdef12345.mp3" preload="auto"></audio>
+
+
+
+<div id="container">
+  <main id ="main">  
+    
+    
+    <!-- Return -->
+    <button id="returnBtn" style="position: fixed; top: 10px; right: 10px; z-index: 1000; padding: 8px 12px; background: #45a29e; color: white; border: none; border-radius: 5px; cursor: pointer;">
+    Return
+  </button>
+    
+    
+    <!-- Title -->
+    <h1> Guardian Gauntlet</h1>
+
+    <!-- Button to roll and display roll effect-->
+    <button id="rollbtn"> Roll Challenge </button>
+  
+    
+    <div id="resultContainer">
+      <div id="result">Press Roll to Start!</div>
+    </div>
+    
+    
+    <!-- Pop Up -->
+    <div id="rollModal" class="modal">
+      <div class="modal-content">
+        <p id="modalText"></p>
+      </div>
+    </div>
+    
+
+    <!-- List of rolled result -->
+    <h2> Active Challenges</h2>
+    <div id="historyContainer">
+      <u1 id="history"></u1>
+    </div>
+    
+    
+    <!-- Clear All -->
+    <button id="clearAllBtn">Clear All</button>
+    
+    
+    <!-- Reset Page -->
+    <div></div>
+    <button id="resetBtn">Reset Page</button>
+    
+    
+  </main>
+
+  <aside id="sidebar">
+    <!-- All Available challenges -->
+    <h2>All Possible Challenges</h2>
+    <ul id="allRestrictions"></ul>
+
+    <!-- All possible Challenges -->
+    <div style="margin-top: 10px;">
+      <input type="text" id="customInput" placeholder="Add your challenge">
+      <button id="addCustomBtn">Add Custom</button>
+    </div>
+  </aside>
+</div>

@@ -13,7 +13,7 @@ const restrictions = [
   "Can’t use super",
   "Equip a waveframe",
   "Double special",
-  "Put on a “off-meta” exotic",
+  "Put on an off-meta exotic",
   "No 5th level artifact",
   "Only one element for damage",
   "No finishers",
@@ -21,6 +21,8 @@ const restrictions = [
   "Use a sword"
 ];
 
+const rollBtn = document.getElementById("rollbtn");
+const result = document.getElementById("result");
 const selectedChallengesList = document.getElementById("selectedChallengesList");
 
 rollBtn.addEventListener("click", () => {
@@ -37,12 +39,9 @@ rollBtn.addEventListener("click", () => {
       clearInterval(spin);
       rollBtn.disabled = false;
 
-      // Add the final choice to the list
       const li = document.createElement("li");
       li.textContent = choice;
       selectedChallengesList.appendChild(li);
     }
   }, 100);
 });
-
-

@@ -2,13 +2,13 @@ body {
   background-color: #121212;
   color: #66fcf1;
   display: flex;
+  flex-direction: column; /* ✅ stack children vertically */
   justify-content: center;
   align-items: center;
   height: 100vh;
   margin: 0;
   font-family: Futura, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
-
 
 #rollbtn {
   padding: 15px 40px;
@@ -19,7 +19,6 @@ body {
   border-radius: 6px;
   color: white;
   transition: background 0.3s ease;
-  font-family: Futura, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 #rollbtn:disabled {
@@ -47,16 +46,17 @@ body {
 #selectedChallengesContainer {
   margin-top: 30px;
   color: #66fcf1;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   max-width: 400px;
   margin-left: auto;
   margin-right: auto;
   text-align: center;
+  /* ✅ Remove font-family override here to keep Futura */
 }
 
 #selectedChallengesList {
-  list-style-type: none;
-  padding-left: 0;
+  list-style-type: none;  /* ✅ remove bullet */
+  padding-left: 0;        /* ✅ remove indent */
+  margin: 0;              /* ✅ ensure no margin adds weird space */
   max-height: 200px;
   overflow-y: auto;
   border: 1px solid #45a29e;

@@ -67,5 +67,6 @@ body {
 #selectedChallengesList li {
   padding: 8px;
   border-bottom: 1px solid #45a29e;
+  text-align: center;
 }
 

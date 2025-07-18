@@ -69,4 +69,11 @@ body {
   padding: 8px;
   border-bottom: 1px solid #45a29e;
   text-align: center;
+  cursor: pointer;
 }
+
+#selectedChallengesList li:hover {
+  background: #45a29e;
+  color: #0b0c10;
+}
+

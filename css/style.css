@@ -51,13 +51,12 @@ body {
   margin-left: auto;
   margin-right: auto;
   text-align: center;
-  /* ✅ Remove font-family override here to keep Futura */
 }
 
 #selectedChallengesList {
-  list-style-type: none;  /* ✅ remove bullet */
-  padding-left: 0;        /* ✅ remove indent */
-  margin: 0;              /* ✅ ensure no margin adds weird space */
+  list-style-type: none;  
+  padding-left: 0;        
+  margin: 0;              
   max-height: 200px;
   overflow-y: auto;
   border: 1px solid #45a29e;

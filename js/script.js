@@ -111,3 +111,11 @@ rollBtn.addEventListener("click", () => {
     }
   }, 100);
 });
+
+window.addEventListener("load", () => {
+  const popup = document.getElementById("popup");
+  if (popup && !popup.classList.contains("hidden")) {
+    popup.classList.add("hidden");
+  }
+});
+

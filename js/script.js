@@ -1,4 +1,4 @@
-const restrictions = [
+const allRestrictions = [
   "Grenade Launchers each slot",
   "No Exotics",
   "RanDIM",
@@ -21,7 +21,6 @@ const restrictions = [
   "Use a sword"
 ];
 
-// Challenges that are allowed to repeat and NOT added to the list
 const repeatableSet = new Set([
   "Equip a sword",
   "Equip a waveframe",
@@ -35,9 +34,33 @@ const repeatableSet = new Set([
   "Grenade Launchers each slot"
 ]);
 
+// Unique pool starts with only non-repeatables
+let uniquePool = allRestrictions.filter(r => !repeatableSet.has(r));
+let selectedUnique = []; // to track which are currently picked
+
 const rollBtn = document.getElementById("rollbtn");
 const result = document.getElementById("result");
 const selectedChallengesList = document.getElementById("selectedChallengesList");
+
+function showPopup(message) {
+  const popup = document.createElement("div");
+  popup.textContent = message;
+  popup.style.position = "fixed";
+  popup.style.bottom = "30px";
+  popup.style.right = "30px";
+  popup.style.background = "#66fcf1";
+  popup.style.color = "#0b0c10";
+  popup.style.padding = "10px 20px";
+  popup.style.borderRadius = "5px";
+  popup.style.fontFamily = "Arial, sans-serif";
+  popup.style.boxShadow = "0 0 10px #66fcf1";
+  popup.style.zIndex = "9999";
+  document.body.appendChild(popup);
+
+  setTimeout(() => {
+    popup.remove();
+  }, 2000);
+}
 
 rollBtn.addEventListener("click", () => {
   rollBtn.disabled = true;
@@ -47,29 +70,56 @@ rollBtn.addEventListener("click", () => {
   let finalChoice = "";
 
   const spin = setInterval(() => {
-    const choice = restrictions[Math.floor(Math.random() * restrictions.length)];
+    let pool = [];
+
+    if (uniquePool.length > 0 && Math.random() < 0.5) {
+      pool = uniquePool;
+    } else {
+      pool = Array.from(repeatableSet);
+    }
+
+    if (pool.length === 0) {
+      clearInterval(spin);
+      result.textContent = "No more challenges!";
+      rollBtn.disabled = false;
+      return;
+    }
+
+    const choice = pool[Math.floor(Math.random() * pool.length)];
     result.textContent = choice;
     finalChoice = choice;
+
     count++;
     if (count > maxCount) {
       clearInterval(spin);
       rollBtn.disabled = false;
 
+      showPopup(`You rolled: ${finalChoice}`);
+
       if (repeatableSet.has(finalChoice)) {
-        // repeatable - show result but don't add
         return;
       }
 
-      // Check duplicates before adding
-      const existingItems = Array.from(selectedChallengesList.children).map(li => li.textContent);
-      if (existingItems.includes(finalChoice)) {
-        alert("This challenge is already selected!");
-        return;
-      }
+      // Remove from uniquePool + add to selected
+      uniquePool = uniquePool.filter(r => r !== finalChoice);
+      selectedUnique.push(finalChoice);
 
+      // Add to list with a ❌ button
       const li = document.createElement("li");
-      li.textContent = finalChoice;
+      li.textContent = finalChoice + " ";
+      const removeBtn = document.createElement("button");
+      removeBtn.textContent = "❌";
+      removeBtn.style.marginLeft = "10px";
+      removeBtn.onclick = () => {
+        li.remove();
+        // Remove from selected + put back in pool
+        selectedUnique = selectedUnique.filter(r => r !== finalChoice);
+        uniquePool.push(finalChoice);
+      };
+
+      li.appendChild(removeBtn);
       selectedChallengesList.appendChild(li);
     }
   }, 100);
 });
+

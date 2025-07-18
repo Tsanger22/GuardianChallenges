@@ -159,11 +159,10 @@ button:hover {
 }
 
 #main {
-  flex: 1;
-  margin-left: 250px; /* same as sidebar width */
+  margin-left: 250px; /* SAME as sidebar width */
   padding: 40px;
-  text-align: center;
 }
+
 
 /* === Restrictions list in sidebar === */
 #allRestrictions {

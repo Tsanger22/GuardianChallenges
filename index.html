@@ -19,21 +19,27 @@
     <aside id="sidebar">
       <h2>All Possible Challenges</h2>
       <ul id="allRestrictions"></ul>
+
       <div style="margin-top: 10px;">
-        <input type="text" id="customInput" placeholder="Add your challenge">
-        <button id="addCustomBtn">Add Custom</button>
+        <input type="text" id="customInput" placeholder="Add your challenge" />
+        <button id="addCustomBtn" type="button">Add Custom</button>
       </div>
     </aside>
 
     <main id="main">
-      <button id="returnBtn">Return</button>
+      <button id="returnBtn" type="button" style="position: fixed; top: 10px; right: 10px; z-index: 1000; padding: 8px 12px; background: #45a29e; color: white; border: none; border-radius: 5px; cursor: pointer;">
+        Return
+      </button>
+
       <h1>Guardian Gauntlet</h1>
-      <button id="rollbtn">Roll Challenge</button>
+
+      <button id="rollbtn" type="button">Roll Challenge</button>
 
       <div id="resultContainer">
         <div id="result">Press Roll to Start!</div>
       </div>
 
+      <!-- Pop Up Modal -->
       <div id="rollModal" class="modal">
         <div class="modal-content">
           <p id="modalText"></p>
@@ -45,9 +51,15 @@
         <ul id="history"></ul>
       </div>
 
-      <button id="clearAllBtn">Clear All</button>
-      <button id="resetBtn">Reset Page</button>
+      <button id="clearAllBtn" type="button">Clear All</button>
+      <button id="resetBtn" type="button">Reset Page</button>
+
+      <!-- Engram Sound -->
+      <audio id="rollSound" src="https://cdn.pixabay.com/download/audio/2022/03/30/audio_abcdef12345.mp3" preload="auto"></audio>
     </main>
   </div>
+
+  <!-- Your JS -->
+  <script src="js/script.js" defer></script>
 </body>
 </html>

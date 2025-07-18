@@ -1,16 +1,10 @@
-/* Setting up the body */
+/* === General === */
 html, body {
   height: 100%;
   margin: 0;
   padding: 0;
-}
-
-
-body {
-  margin: 0;
   font-family: 'Orbitron', sans-serif;
   background: radial-gradient(circle at center, #00000080 0%, #000000 100%);
-
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
@@ -19,32 +13,29 @@ body {
   padding-top: 50px;
 }
 
-
+/* === Result Container === */
 #resultContainer {
-  text-align: center;   /* centers inline-block children */
+  text-align: center;
 }
 
 #result {
-  display: inline-block;       /* shrink to fit content */
-  max-width: 400px;            /* max width so it’s not too wide */
-  margin: 20px auto 0;         /* 20px top margin, auto left/right to center */
+  display: inline-block;
+  max-width: 400px;
+  margin: 20px auto 0;
   padding: 20px;
   font-size: 1.5rem;
-  text-align: center;          /* center the text inside */
   border: 2px solid #66fcf1;
   border-radius: 8px;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0, 0, 0, 0.5);
   box-shadow: 0 0 20px #66fcf1;
   transition: box-shadow 0.3s ease;
 }
 
-
-/* Pop Up */
-/* The Modal (background) */
+/* === Modal === */
 .modal {
-  display: none; /* Hidden by default */
-  position: fixed; 
-  z-index: 999; 
+  display: none;
+  position: fixed;
+  z-index: 999;
   left: 0;
   top: 0;
   width: 100%;
@@ -53,7 +44,6 @@ body {
   background-color: rgba(0,0,0,0.8);
 }
 
-/* Modal Content Box */
 .modal-content {
   background-color: #0b0c10;
   margin: 15% auto;
@@ -66,8 +56,7 @@ body {
   border-radius: 10px;
   box-shadow: 0 0 20px #66fcf1;
   font-size: 1.2rem;
-
-  opacity: 0;  /* Start hidden */
+  opacity: 0;
   transform: scale(0.8);
   transition: opacity 0.4s ease, transform 0.4s ease;
 }
@@ -77,10 +66,15 @@ body {
   transform: scale(1);
 }
 
+#rollModal .modal-content p {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 20px 0;
+  font-family: 'Orbitron', sans-serif;
+  color: #66fcf1;
+}
 
-
-
-/* Roll Button */
+/* === Buttons === */
 button {
   background: #45a29e;
   border: none;
@@ -92,23 +86,17 @@ button {
   font-family: inherit;
 }
 
-button:hover{
+button:hover {
   background: #66fcf1;
   color: #0b0c10;
 }
 
-
-#rollModal .modal-content p {
-  font-size: 2.5rem;      /* Bigger font size */
-  font-weight: 700;       /* Bold text */
-  text-align: center;     /* Center the text */
-  margin: 20px 0;         /* Some vertical spacing */
-  font-family: 'Orbitron', sans-serif; /* Match your font */
-  color: #66fcf1;         /* Optional: nice bright color */
+#resetBtn {
+  padding: 6px 20px;
+  margin: 10px;
 }
 
-
-/* The selected challenges */
+/* === History === */
 #historyContainer {
   max-height: 200px;
   overflow-y: auto;
@@ -129,12 +117,12 @@ button:hover{
 
 #historyContainer li {
   position: relative;
-  padding: 6px 40px; /* enough right padding to fit the button */
+  padding: 6px 40px;
   border: 1px solid #66fcf1;
   border-radius: 4px;
   background: rgba(0, 0, 0, 0.2);
-  list-style: none;
-  text-align: center; /* center text in li */
+  text-align: center;
+  margin: 10px 0;
 }
 
 #historyContainer li button {
@@ -151,59 +139,33 @@ button:hover{
   padding: 2px 10px;
 }
 
-
-
-#historyContainer li:last-child {
-}
-
-
-u1 {
-  list-style: none;
-  padding: 6px 10px;
-}
-
-li {
-  margin: 20px 20px;
-}
-
-li button{
-  margin-left: 10px;
-  background: red;
-  border: none;
-  color: white;
-  cursor: pointer;
-  border-radius: 4px;
-  font-family: inherit;
-}
-
-
-/* The sidebar on the left */
+/* === Sidebar === */
 #container {
   display: flex;
   min-height: 100vh;
-  color: #66fcf1;
 }
 
 #sidebar {
   position: fixed;
   top: 0;
   left: 0;
-  width: 250px; /* or whatever your sidebar width is */
+  width: 250px;
   height: 100%;
-  overflow-y: auto; /* allow scrolling *inside* sidebar if content is tall */
+  overflow-y: auto;
   background: rgba(0, 0, 0, 0.5);
   border-right: 2px solid #66fcf1;
   padding: 20px;
   box-sizing: border-box;
 }
 
-
 #main {
   flex: 1;
+  margin-left: 250px; /* same as sidebar width */
   padding: 40px;
   text-align: center;
 }
 
+/* === Restrictions list in sidebar === */
 #allRestrictions {
   list-style: none;
   padding: 0;
@@ -228,11 +190,6 @@ li button{
   cursor: pointer;
 }
 
-
-#allRestrictions li:last-child {
-  border-bottom: none;
-}
-
 #customInput {
   width: calc(100% - 90px);
   padding: 6px 10px;
@@ -243,9 +200,7 @@ li button{
   padding: 6px 20px;
 }
 
-
-#resetBtn {
-  padding: 6px 20px;
-  margin: 10px;
+/* === Misc === */
+li {
+  margin: 20px 0;
 }
-

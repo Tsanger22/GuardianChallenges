@@ -96,14 +96,14 @@ rollBtn.addEventListener("click", () => {
       showPopup(`You rolled: ${finalChoice}`);
 
       if (repeatableSet.has(finalChoice)) {
-        return;
+        return; // repeatables don’t go in the list
       }
 
       // Remove from uniquePool + add to selected
       uniquePool = uniquePool.filter(r => r !== finalChoice);
       selectedUnique.push(finalChoice);
 
-      // Add to list as clickable item
+      // Add clickable list item — NO ❌, just click to remove
       const li = document.createElement("li");
       li.textContent = finalChoice;
       li.style.cursor = "pointer";
@@ -118,4 +118,3 @@ rollBtn.addEventListener("click", () => {
     }
   }, 100);
 });
-

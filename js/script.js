@@ -34,9 +34,8 @@ const repeatableSet = new Set([
   "Grenade Launchers each slot"
 ]);
 
-// Unique pool starts with only non-repeatables
 let uniquePool = allRestrictions.filter(r => !repeatableSet.has(r));
-let selectedUnique = []; // to track which are currently picked
+let selectedUnique = [];
 
 const rollBtn = document.getElementById("rollbtn");
 const result = document.getElementById("result");
@@ -104,20 +103,17 @@ rollBtn.addEventListener("click", () => {
       uniquePool = uniquePool.filter(r => r !== finalChoice);
       selectedUnique.push(finalChoice);
 
-      // Add to list with a ❌ button
+      // Add to list as clickable item
       const li = document.createElement("li");
-      li.textContent = finalChoice + " ";
-      const removeBtn = document.createElement("button");
-      removeBtn.textContent = "❌";
-      removeBtn.style.marginLeft = "10px";
-      removeBtn.onclick = () => {
+      li.textContent = finalChoice;
+      li.style.cursor = "pointer";
+
+      li.onclick = () => {
         li.remove();
-        // Remove from selected + put back in pool
         selectedUnique = selectedUnique.filter(r => r !== finalChoice);
         uniquePool.push(finalChoice);
       };
 
-      li.appendChild(removeBtn);
       selectedChallengesList.appendChild(li);
     }
   }, 100);

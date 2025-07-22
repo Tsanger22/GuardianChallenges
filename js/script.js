@@ -182,7 +182,7 @@ document.getElementById("addCustomBtn").addEventListener("click", () => {
       uniquePool.push(customText);
     }
 
-    renderAllChallenges(); // Your render function to update the sidebar
+    renderSidebar(); // Your render function to update the sidebar
     input.value = "";
     document.getElementById("repeatableCheckbox").checked = false; // reset
   }

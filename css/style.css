@@ -86,8 +86,21 @@ body {
   color: #0b0c10;
 }
 
-#sidebar label {
-  color: #66fcf1;
+#sidebarControls {
+  padding: 20px;
+  border-top: 2px solid #66fcf1;
+  background: #1f2833;
+}
+
+#checkboxLabel {
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+}
+
+#checkboxLabel input[type="checkbox"] {
+  margin-right: 6px;
 }
 
 #main {

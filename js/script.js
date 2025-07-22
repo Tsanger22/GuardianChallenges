@@ -34,35 +34,25 @@ const repeatableSet = new Set([
   "Grenade Launchers each slot"
 ]);
 
-let uniquePool = allChallenges.filter(r => !repeatableSet.has(r));
+// Holds all user-hidden challenges (localStorage)
+let hiddenChallenges = JSON.parse(localStorage.getItem('hiddenChallenges')) || [];
+
+// Unique pool = all non-repeatables minus hidden
+function getUniquePool() {
+  return allChallenges.filter(r => !repeatableSet.has(r) && !hiddenChallenges.includes(r));
+}
+
+// Repeatables pool = all repeatables minus hidden
+function getRepeatablePool() {
+  return Array.from(repeatableSet).filter(r => !hiddenChallenges.includes(r));
+}
+
 let selectedUnique = [];
 
 const rollBtn = document.getElementById("rollbtn");
 const result = document.getElementById("result");
 const selectedChallengesList = document.getElementById("selectedChallengesList");
 
-// Popup Message
-function showPopup(message) {
-  const popup = document.getElementById("popup");
-  const popupContent = document.getElementById("popup-content");
-
-  popupContent.textContent = message;
-  popup.classList.remove("hidden");
-
-  popupContent.onclick = () => {
-    popup.classList.add("hidden");
-  };
-}
-
-
-// Sidebar local hide
-let hiddenChallenges = [];
-if (localStorage.getItem('hiddenChallenges')) {
-  hiddenChallenges = JSON.parse(localStorage.getItem('hiddenChallenges'));
-}
-
-
-// Render the sidebar
 function renderSidebar() {
   const list = document.getElementById('allChallenges');
   list.innerHTML = '';
@@ -72,20 +62,28 @@ function renderSidebar() {
 
     const li = document.createElement('li');
     li.textContent = challenge;
-
     li.onclick = () => {
       hiddenChallenges.push(challenge);
       localStorage.setItem('hiddenChallenges', JSON.stringify(hiddenChallenges));
       renderSidebar();
     };
-
     list.appendChild(li);
   });
 }
 
 renderSidebar();
 
-// Roll challenge
+function showPopup(message) {
+  const popup = document.getElementById("popup");
+  const popupContent = document.getElementById("popup-content");
+  popupContent.textContent = message;
+  popup.classList.remove("hidden");
+
+  popupContent.onclick = () => {
+    popup.classList.add("hidden");
+  };
+}
+
 rollBtn.addEventListener("click", () => {
   rollBtn.disabled = true;
 
@@ -94,12 +92,15 @@ rollBtn.addEventListener("click", () => {
   let finalChoice = "";
 
   const spin = setInterval(() => {
+    let uniquePool = getUniquePool();
+    let repeatablePool = getRepeatablePool();
+
     let pool = [];
 
     if (uniquePool.length > 0 && Math.random() < 0.5) {
       pool = uniquePool;
     } else {
-      pool = Array.from(repeatableSet);
+      pool = repeatablePool;
     }
 
     if (pool.length === 0) {
@@ -120,7 +121,6 @@ rollBtn.addEventListener("click", () => {
 
       showPopup(`You rolled: ${finalChoice}`);
 
-      // adds Confetti
       confetti({
         particleCount: 100,
         spread: 70,
@@ -128,27 +128,35 @@ rollBtn.addEventListener("click", () => {
       });
 
       if (repeatableSet.has(finalChoice)) {
-        return; // repeatables don’t go in the list
+        return; // repeatables do not persist
       }
 
-      // Remove from uniquePool + add to selected
-      uniquePool = uniquePool.filter(r => r !== finalChoice);
-      selectedUnique.push(finalChoice);
+      // Remove unique from pool by hiding it too:
+      hiddenChallenges.push(finalChoice);
+      localStorage.setItem('hiddenChallenges', JSON.stringify(hiddenChallenges));
 
-      // Add clickable list item — NO ❌, just click to remove
+      selectedUnique.push(finalChoice);
       const li = document.createElement("li");
       li.textContent = finalChoice;
-      li.style.cursor = "pointer";
-
       li.onclick = () => {
         li.remove();
         selectedUnique = selectedUnique.filter(r => r !== finalChoice);
-        uniquePool.push(finalChoice);
+        // Also unhide from hiddenChallenges
+        hiddenChallenges = hiddenChallenges.filter(h => h !== finalChoice);
+        localStorage.setItem('hiddenChallenges', JSON.stringify(hiddenChallenges));
+        renderSidebar();
       };
-
       selectedChallengesList.appendChild(li);
+
+      renderSidebar();
     }
   }, 100);
+});
+
+document.getElementById("resetHiddenBtn")?.addEventListener("click", () => {
+  hiddenChallenges = [];
+  localStorage.removeItem('hiddenChallenges');
+  renderSidebar();
 });
 
 window.addEventListener("load", () => {
@@ -157,3 +165,4 @@ window.addEventListener("load", () => {
     popup.classList.add("hidden");
   }
 });
+

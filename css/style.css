@@ -21,12 +21,15 @@ body {
   background: #1f2833;
   border-right: 2px solid #66fcf1;
   padding: 20px;
-  overflow-y: auto;
+  overflow-y: hidden;  
+  display: flex;
+  flex-direction: column
 }
 
 #sidebarContent {
   display: flex;
   flex-direction: column;
+  flex: 1;                
   overflow-y: auto;
   max-height: calc(100% - 40px);
 }

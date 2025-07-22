@@ -11,8 +11,6 @@ body {
 }
 
 #sidebar {
-  color: #66fcf1;
-  box-sizing: border-box;
   position: fixed;
   left: 0;
   top: 0;
@@ -20,63 +18,74 @@ body {
   height: 100vh;
   background: #1f2833;
   border-right: 2px solid #66fcf1;
-  padding: 20px;
-  overflow-y: hidden;  
-  display: flex;
-  flex-direction: column
-}
-
-#sidebarContent {
+  color: #66fcf1;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  flex: 1;                
-  overflow-y: auto;
-  max-height: calc(100% - 40px);
+  padding: 20px;
 }
 
 #sidebar h2 {
-  margin-top: 0;
+  margin: 0 0 10px 0;
   font-size: 1.2rem;
+}
+
+#sidebar hr {
+  border: none;
+  border-top: 1px solid #66fcf1;
+  margin: 10px 0;
+}
+
+#sidebarContent {
+  flex: 1;
+  overflow-y: auto;
 }
 
 #sidebar ul {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
 
 #sidebar li {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   background: rgba(255, 255, 255, 0.05);
-  padding: 8px 10px;
   margin: 8px 0;
+  padding: 8px 10px;
   cursor: pointer;
-  transition: background 0.2s;
   text-align: center;
+  transition: background 0.2s;
 }
 
 #sidebar li:hover {
   background: rgba(255, 255, 255, 0.15);
 }
 
+#sidebar input,
 #sidebar button {
-  margin-top: 20px;
+  margin-top: 10px;
+  width: 100%;
+}
+
+#sidebar input {
+  padding: 8px;
+  border: none;
+  border-radius: 4px;
+}
+
+#sidebar button {
   background: #45a29e;
   border: none;
   color: white;
   padding: 10px;
   cursor: pointer;
+  border-radius: 4px;
 }
 
-#sidebar li button {
-  background: red;
-  color: white;
-  border: none;
-  cursor: pointer;
-  border-radius: 3px;
-  padding: 2px 6px;
+#sidebar button:hover {
+  background: #66fcf1;
+  color: #0b0c10;
 }
+
 
 
 #main {

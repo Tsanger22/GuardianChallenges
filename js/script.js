@@ -166,3 +166,24 @@ window.addEventListener("load", () => {
   }
 });
 
+
+// Custom Button
+document.getElementById("addCustomBtn").addEventListener("click", () => {
+  const input = document.getElementById("customInput");
+  const isRepeatable = document.getElementById("repeatableCheckbox").checked;
+  const customText = input.value.trim();
+
+  if (customText) {
+    allChallenges.push(customText);
+
+    if (isRepeatable) {
+      repeatableSet.add(customText);
+    } else {
+      uniquePool.push(customText);
+    }
+
+    renderAllChallenges(); // Your render function to update the sidebar
+    input.value = "";
+    document.getElementById("repeatableCheckbox").checked = false; // reset
+  }
+});

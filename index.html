@@ -2,20 +2,30 @@
 
 <link rel="stylesheet" href="css/style.css" />
 
+  <!-- Title and roll challenge -->
   <h1 id="title">Guardian Gauntlet</h1>
   <button id="rollbtn">Roll Challenge</button>
   <div id="result">Press Roll to Start!</div>
 
+  <!-- Sidebar Content -->
+  <aside id="sidebar">
+    <h2>Available Challenges</h2>
+    <ul id="allChallenges"></ul>
+  </aside>
+
+  <!-- Current Challenges -->
   <div id="selectedChallengesContainer">
     <h2>Selected Challenges</h2>
     <ul id="selectedChallengesList"></ul>
   </div>
 
+  <!-- Popup -->
   <div id="popup" class="hidden">
     <div id="popup-content"></div>
   </div>
 
   <script src="js/script.js"></script>
+
   <!-- Confetti -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 

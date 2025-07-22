@@ -93,15 +93,19 @@ body {
 }
 
 #checkboxLabel {
-  font-size: 0.9rem;
   display: flex;
   align-items: center;
+  justify-content: flex-start; /* makes sure it hugs the left */
+  gap: 6px;                    /* nice space between box + text */
+  font-size: 0.9rem;
   margin: 10px 0;
+  width: 100%;                 /* keeps it inside parent */
 }
 
 #checkboxLabel input[type="checkbox"] {
-  margin-right: 6px;
+  margin: 0;                   /* no weird side margins */
 }
+
 
 #main {
   margin-left: 320px; /* room for sidebar */

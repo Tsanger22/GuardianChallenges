@@ -11,6 +11,8 @@ body {
 }
 
 #sidebar {
+  color: #66fcf1;
+  box-sizing: border-box;
   position: fixed;
   left: 0;
   top: 0;
@@ -20,6 +22,13 @@ body {
   border-right: 2px solid #66fcf1;
   padding: 20px;
   overflow-y: auto;
+}
+
+#sidebarContent {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  max-height: calc(100% - 40px);
 }
 
 #sidebar h2 {
@@ -42,12 +51,23 @@ body {
   border-radius: 4px;
   cursor: pointer;
   transition: background 0.2s;
+  border-bottom: 1px solid #66fcf1;
+  text-align: center;
 }
 
 #sidebar li:hover {
   background: rgba(255, 255, 255, 0.15);
 }
 
+#sidebar button {
+  margin-top: 20px;
+  background: #45a29e;
+  border: none;
+  color: white;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 4px;
+}
 
 #sidebar li button {
   background: red;
@@ -58,9 +78,20 @@ body {
   padding: 2px 6px;
 }
 
+
+#main {
+  margin-left: 320px; /* room for sidebar */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100vh;
+  text-align: center;
+}
+
 #mainContent {
-  margin-left: 270px; /* width + gap */
-  padding: 40px;
+  display: flex;
+  flex-direction: column;
   align-items: center;
 }
 

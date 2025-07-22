@@ -86,7 +86,9 @@ body {
   color: #0b0c10;
 }
 
-
+#sidebar label {
+  color: #66fcf1;
+}
 
 #main {
   margin-left: 320px; /* room for sidebar */

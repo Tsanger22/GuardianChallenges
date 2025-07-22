@@ -54,6 +54,14 @@ function showPopup(message) {
   };
 }
 
+
+// Sidebar local hide
+let hiddenChallenges = [];
+if (localStorage.getItem('hiddenChallenges')) {
+  hiddenChallenges = JSON.parse(localStorage.getItem('hiddenChallenges'));
+}
+
+
 // Render the sidebar
 function renderSidebar() {
   const list = document.getElementById('allChallenges');

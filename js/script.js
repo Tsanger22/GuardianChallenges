@@ -18,7 +18,7 @@ const allChallenges = [
   "Only one element for damage",
   "No finishers",
   "No fonts",
-  "Use a sword"
+  "Equip a sword"
 ];
 
 const repeatableSet = new Set([

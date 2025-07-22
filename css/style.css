@@ -1,205 +1,106 @@
-/* === General === */
-html, body {
-  height: 100%;
+body {
+  background-color: #121212;
+  color: #66fcf1;
+  display: flex;
+  flex-direction: column; /* ✅ stack children vertically */
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
   margin: 0;
-  padding: 0;
-  font-family: 'Orbitron', sans-serif;
-  background: radial-gradient(circle at center, #00000080 0%, #000000 100%);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-attachment: fixed;
-  color: #66fcf1;
-  text-align: center;
-  padding-top: 50px;
+  font-family: Futura, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* === Result Container === */
-#resultContainer {
-  text-align: center;
-}
-
-#result {
-  display: inline-block;
-  max-width: 400px;
-  margin: 20px auto 0;
-  padding: 20px;
-  font-size: 1.5rem;
-  border: 2px solid #66fcf1;
-  border-radius: 8px;
-  background: rgba(0, 0, 0, 0.5);
-  box-shadow: 0 0 20px #66fcf1;
-  transition: box-shadow 0.3s ease;
-}
-
-/* === Modal === */
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 999;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0,0,0,0.8);
-}
-
-.modal-content {
-  background-color: #0b0c10;
-  margin: 15% auto;
-  padding: 20px;
-  border: 2px solid #66fcf1;
-  width: 60%;
-  max-width: 400px;
-  text-align: center;
-  color: #66fcf1;
-  border-radius: 10px;
-  box-shadow: 0 0 20px #66fcf1;
-  font-size: 1.2rem;
-  opacity: 0;
-  transform: scale(0.8);
-  transition: opacity 0.4s ease, transform 0.4s ease;
-}
-
-.modal-content.show {
-  opacity: 1;
-  transform: scale(1);
-}
-
-#rollModal .modal-content p {
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin: 20px 0;
-  font-family: 'Orbitron', sans-serif;
-  color: #66fcf1;
-}
-
-/* === Buttons === */
-button {
+#rollbtn {
+  padding: 15px 40px;
+  font-size: 1.3rem;
+  cursor: pointer;
   background: #45a29e;
   border: none;
-  padding: 10px 20px;
+  border-radius: 6px;
   color: white;
-  font-size: 1.2em;
-  cursor: pointer;
-  border-radius: 5px;
-  font-family: inherit;
+  transition: background 0.3s ease;
+  font-family: Futura, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
-button:hover {
+#rollbtn:disabled {
+  background: #333;
+  cursor: not-allowed;
+}
+
+#rollbtn:hover:not(:disabled) {
   background: #66fcf1;
   color: #0b0c10;
 }
 
-#resetBtn {
-  padding: 6px 20px;
-  margin: 10px;
+#result {
+  margin-top: 30px;
+  font-size: 2rem;
+  padding: 20px 40px;
+  border: 2px solid #66fcf1;
+  border-radius: 8px;
+  text-align: center;
+  min-width: 300px;
+  box-shadow: 0 0 20px #66fcf1;
+  transition: box-shadow 0.2s ease;
 }
 
-/* === History === */
-#historyContainer {
+#selectedChallengesContainer {
+  margin-top: 30px;
+  color: #66fcf1;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+#selectedChallengesList {
+  list-style-type: none;  
+  padding-left: 0;        
+  margin: 0;              
   max-height: 200px;
   overflow-y: auto;
-  background: rgba(0, 0, 0, 0.4);
-  border: 1px solid #66fcf1;
-  border-radius: 4px;
-  padding: 10px;
-  margin: 0 auto 20px;
-  width: 60%;
-  text-align: left;
+  border: 1px solid #45a29e;
+  border-radius: 6px;
+  background: #0b0c10;
 }
 
-#historyContainer ul {
-  list-style: none;
-  padding: 0;
-  margin: 20px;
-}
-
-#historyContainer li {
-  position: relative;
-  padding: 6px 40px;
-  border: 1px solid #66fcf1;
-  border-radius: 4px;
-  background: rgba(0, 0, 0, 0.2);
+#selectedChallengesList li {
+  padding: 8px;
+  border-bottom: 1px solid #45a29e;
   text-align: center;
-  margin: 10px 0;
-}
-
-#historyContainer li button {
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: red;
-  border: none;
-  color: white;
   cursor: pointer;
-  border-radius: 4px;
-  font-family: inherit;
-  padding: 2px 10px;
 }
 
-/* === Sidebar === */
-#container {
-  display: flex;
-  min-height: 100vh;
+#selectedChallengesList li:hover {
+  background: #45a29e;
+  color: #0b0c10;
 }
 
-#sidebar {
+#popup {
   position: fixed;
   top: 0;
   left: 0;
-  width: 250px;
+  width: 100%;
   height: 100%;
-  overflow-y: auto;
-  background: rgba(0, 0, 0, 0.5);
-  border-right: 2px solid #66fcf1;
-  padding: 20px;
-  box-sizing: border-box;
-}
-
-#main {
-  margin-left: 250px; /* SAME as sidebar width */
-  padding: 40px;
-}
-
-
-/* === Restrictions list in sidebar === */
-#allRestrictions {
-  list-style: none;
-  padding: 0;
-  max-height: 60vh;
-  overflow-y: auto;
-  border: 1px solid #66fcf1;
-  border-radius: 4px;
-}
-
-#allRestrictions li {
+  background: rgba(0, 0, 0, 0.8);
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  margin-bottom: 8px;
+  z-index: 9999;
 }
 
-#allRestrictions li button {
-  background: red;
-  color: white;
-  border: none;
-  border-radius: 4px;
+#popup-content {
+  background: #66fcf1;
+  color: #0b0c10;
+  padding: 40px 60px;
+  border-radius: 10px;
+  font-size: 1.5rem;
+  font-family: Futura, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+  box-shadow: 0 0 30px #66fcf1;
   cursor: pointer;
 }
 
-#customInput {
-  width: calc(100% - 90px);
-  padding: 6px 10px;
-  margin-bottom: 20px;
-}
-
-#addCustomBtn {
-  padding: 6px 20px;
-}
-
-/* === Misc === */
-li {
-  margin: 20px 0;
+.hidden {
+  display: none !important; /* overrides flex */
 }

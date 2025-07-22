@@ -92,19 +92,22 @@ body {
   background: #1f2833;
 }
 
-#checkboxLabel {
+.checkboxRow {
   display: flex;
   align-items: center;
-  justify-content: flex-start; /* makes sure it hugs the left */
-  gap: 6px;                    /* nice space between box + text */
-  font-size: 0.9rem;
   margin: 10px 0;
-  width: 100%;                 /* keeps it inside parent */
 }
 
-#checkboxLabel input[type="checkbox"] {
-  margin: 0;                   /* no weird side margins */
+.checkboxRow input[type="checkbox"] {
+  margin-right: 6px;
+  cursor: pointer;
 }
+
+.checkboxRow span {
+  font-size: 0.9rem;
+  user-select: none; /* optional: prevents accidental text highlight */
+}
+
 
 
 #main {

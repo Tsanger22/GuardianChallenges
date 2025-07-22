@@ -88,6 +88,13 @@ rollBtn.addEventListener("click", () => {
 
       showPopup(`You rolled: ${finalChoice}`);
 
+      // adds Confetti
+      confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 }
+      });
+
       if (repeatableSet.has(finalChoice)) {
         return; // repeatables don’t go in the list
       }

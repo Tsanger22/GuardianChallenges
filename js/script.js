@@ -1,4 +1,4 @@
-const allRestrictions = [
+const allChallenges = [
   "Grenade Launchers each slot",
   "No Exotics",
   "RanDIM",
@@ -34,13 +34,14 @@ const repeatableSet = new Set([
   "Grenade Launchers each slot"
 ]);
 
-let uniquePool = allRestrictions.filter(r => !repeatableSet.has(r));
+let uniquePool = allChallenges.filter(r => !repeatableSet.has(r));
 let selectedUnique = [];
 
 const rollBtn = document.getElementById("rollbtn");
 const result = document.getElementById("result");
 const selectedChallengesList = document.getElementById("selectedChallengesList");
 
+// Popup Message
 function showPopup(message) {
   const popup = document.getElementById("popup");
   const popupContent = document.getElementById("popup-content");
@@ -53,7 +54,30 @@ function showPopup(message) {
   };
 }
 
+// Render the sidebar
+function renderSidebar() {
+  const list = document.getElementById('allChallenges');
+  list.innerHTML = '';
 
+  allChallenges.forEach(challenge => {
+    if (hiddenChallenges.includes(challenge)) return;
+
+    const li = document.createElement('li');
+    li.textContent = challenge;
+
+    li.onclick = () => {
+      hiddenChallenges.push(challenge);
+      localStorage.setItem('hiddenChallenges', JSON.stringify(hiddenChallenges));
+      renderSidebar();
+    };
+
+    list.appendChild(li);
+  });
+}
+
+renderSidebar();
+
+// Roll challenge
 rollBtn.addEventListener("click", () => {
   rollBtn.disabled = true;
 
@@ -125,4 +149,3 @@ window.addEventListener("load", () => {
     popup.classList.add("hidden");
   }
 });
-
